@@ -1,0 +1,54 @@
+这是一个简单的针对 FastAdmin 开发的一个构建工具，开发此工具的目的是方便维护 FastAdmin 项目。
+
+项目背景：
+- 最近公司可能要用 FastAdmin 来开发项目，但是可能需要修改 FastAdmin 核心层，但是修改核心后，升级将是问题，此构建工具可以很好的解决此问题
+- 我在开发此工具前，只看了一天 FastAdmin，然后使用周末的三个小时开发而成，可能对 FastAdmin 的某些理解有偏差，项目也不成熟
+- 此项目会根据具体需求来做后续的开发
+
+项目优点：
+- 实现了 多配置环境构建 (example/config)
+- 实现了 FastAdmin 官方版本与项目修订版本的分离 (example/framework)
+- 实现了项目扩展的目录分离，可以通过子模块等方式引入，方便维护 (example/root)
+
+使用方式：
+- 克隆本项目：git clone https://github.com/ztj1993/GulpFastadminTools.git
+- 安装本项目：npm install
+- 初始化框架：gulp InitFastadmin
+- 复制框架文件：gulp CopyFastadmin
+- 初始化开发目录：gulp InitSrc
+- 配置本地环境 src/config/local
+- 复制本地环境配置文件：echo local | gulp CopyConfig
+- 安装框架：gulp InstallFastadmin
+
+目录 src/root 说明：
+- 此目录为放置项目模块插件等文件的目录
+- 其中以 __ 为中间符的代表一层目录，如：src/root/addons__example 将复制到 dist/addons/example
+- 其中 root 目录为跟目录，这下面的文件将直接复制到 dist 目录下
+- 其他目录复制到对应目录，如：src/root/addons 将复制到 dist/addons
+
+目录结构说明：
+- dist - 构建目标目录
+- example - 示例目录，也是本程序的主目录，这个目录的文件将复制到 src 目录下，对应任务：InitSrc
+- fastadmin - 框架程序目录，主要放置原版框架，对应任务：InitFastadmin, CopyFastadmin, InstallFastadmin
+- src - 开发目录，此目录为您的项目跟目录，对应任务：InitSrc
+- src/config - 配置文件目录，对应多个配置环境，对应任务：CopyConfig
+- src/framework - 对框架的修正目录文件存放位置，对应任务：CopyFramework
+- src/root - 开发的程序文件目录，具体见此目录的专有说明，对应任务：CopyRoot
+
+任务说明：
+- CopyRoot：复制 src/root 目录
+- CopyConfig：复制 src/config 下某个目录
+- CopyFramework：复制 src/framework 目录
+- InitAddon：初始化某个插件
+- InitSrc：初始化 src 目录
+- InitFastadmin：初始化框架
+- InstallFastadmin：安装框架
+- CopyFastadmin：复制框架
+
+多配置环境使用说明：
+- 针对 config 的配置，建议先实现 config.default.php
+- 示例为：example/framework/application/config.default.php
+- 针对 database 的配置，建议先实现 database.default.php
+- 示例为：example/framework/application/database.default.php
+- 以上两个文件均复制于官方原版，在开发时，应当放置的目录为 src 对应目录
+- 其他的配置可以参考此方案实现

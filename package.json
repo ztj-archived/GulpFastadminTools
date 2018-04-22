@@ -1,0 +1,24 @@
+{
+  "name": "gulp-fastadmin-tools",
+  "version": "0.0.1",
+  "description": "This is a simple fastadmin build tools.",
+  "homepage": "http://www.zhangtianjie.com",
+  "license": "MIT",
+  "author": {
+    "name": "ZhangTianJie",
+    "email": "807261773@qq.com",
+    "url": "http://www.zhangtianjie.com"
+  },
+  "engines": {
+    "node": ">=6.1.0",
+    "npm": "~3.0.0"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "gulp": "3.9.1",
+    "gulp-folders": "^1.1.0",
+    "gulp-prompt": "^1.0.1",
+    "gulp-shell": "^0.6.5",
+    "path": "^0.12.7"
+  }
+}
