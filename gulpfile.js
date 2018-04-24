@@ -66,16 +66,14 @@ gulp.task('InitFastadmin', function () {
             gulp.src('gulpfile.js', {read: false})
                 .pipe(shell([
                     'cd fastadmin && bower install',
-                    'cd fastadmin && composer install',
-                    'cd fastadmin && php think install'
+                    'cd fastadmin && composer install'
                 ]));
         } else {
             gulp.src('gulpfile.js', {read: false})
                 .pipe(shell('git clone https://gitee.com/karson/fastadmin.git'))
                 .pipe(shell([
                     'cd fastadmin && bower install',
-                    'cd fastadmin && composer install',
-                    'cd fastadmin && php think install'
+                    'cd fastadmin && composer install'
                 ]));
         }
     });
