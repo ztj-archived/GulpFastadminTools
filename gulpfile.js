@@ -9,11 +9,17 @@ var folders = require('gulp-folders');
 gulp.task('CopyRoot', folders('./src/root', function (folder) {
     var srcPath, destPath;
     if (folder === 'root') {
-        srcPath = ['./src/root/root/**', '!**/README', './src/root/root/**/.htaccess'];
+        srcPath = [
+            './src/root/root/**/*',
+            './src/root/root/**/.*',
+            '!**/README'];
         destPath = './dist';
         return gulp.src(srcPath).pipe(gulp.dest(destPath));
     } else {
-        srcPath = [path.join('./src/root', folder, '**'), '!**/README'];
+        srcPath = [
+            path.join('./src/root', folder, '**'),
+            path.join('./src/root', folder, '**', '.*'),
+            '!**/README'];
         destPath = path.join('./dist', folder.replace('__', '/'));
         return gulp.src(srcPath).pipe(gulp.dest(destPath));
     }
@@ -26,14 +32,20 @@ gulp.task('CopyConfig', function () {
         name: 'name',
         message: 'Please enter the configuration environment name:'
     }, function (res) {
-        gulp.src(['./src/config/' + res.name + '/**', '!**/README', './src/config/**/.htaccess'])
+        gulp.src([
+            path.join('./src/config', res.name, '**'),
+            path.join('./src/config', res.name, '**', '.*'),
+            '!**/README'])
             .pipe(gulp.dest('./dist'));
     }));
 });
 
 //复制 src/framework 目录
 gulp.task('CopyFramework', function () {
-    gulp.src(['./src/framework/**', '!**/README'])
+    gulp.src([
+        './src/framework/**',
+        './src/framework/**/.*',
+        '!**/README'])
         .pipe(gulp.dest('./dist'));
 });
 
@@ -87,6 +99,8 @@ gulp.task('InstallFastadmin', function () {
 
 //复制 fastadmin 目录
 gulp.task('CopyFastadmin', function () {
-    gulp.src(['./fastadmin/**', './fastadmin/**/.htaccess'])
+    gulp.src([
+        './fastadmin/**',
+        './fastadmin/**/.*'])
         .pipe(gulp.dest('./dist'));
 });
