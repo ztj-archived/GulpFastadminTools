@@ -67,7 +67,9 @@ gulp.task('InitAddon', function () {
 
 //初始化 src
 gulp.task('InitSrc', function () {
-    gulp.src(['./example/**', '!./example/**/*.php'])
+    gulp.src([
+        './example/**',
+        '!**/*'])
         .pipe(gulp.dest('./src'));
 });
 
